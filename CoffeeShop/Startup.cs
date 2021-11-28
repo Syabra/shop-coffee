@@ -33,17 +33,13 @@ namespace CoffeeShop
             services.AddTransient<IAllCoffee, CoffeeRepository>();
             services.AddTransient<ICoffeeCategory, CategoryRepository>();
             services.AddTransient<IAllOrders, OrdersRepository>();
-<<<<<<< HEAD
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => ShopCart.GetCart(sp));
 
             services.AddMvc(op => op.EnableEndpointRouting = false);
             services.AddMemoryCache();
             services.AddSession();
-=======
             services.AddControllersWithViews();
-            //can i changing this file from gitlab?
->>>>>>> 95c867344cda786b0d674ab247e9ea8c25717ef2
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
