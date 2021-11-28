@@ -32,6 +32,7 @@ namespace CoffeeShop
             services.AddTransient<ICoffeeCategory, CategoryRepository>();
             services.AddTransient<IAllOrders, OrdersRepository>();
             services.AddControllersWithViews();
+            //can i changing this file from gitlab?
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
