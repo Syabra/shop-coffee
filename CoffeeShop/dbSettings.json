@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=aspnet-Coffee-Shop-B110359E-DE26-4237-B17B-FC1A8CF84737;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+}
