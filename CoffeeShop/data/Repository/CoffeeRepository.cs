@@ -20,7 +20,7 @@ namespace CoffeeShop.Data.Repository
 
         public IEnumerable<Coffee> Coffee => appDBContent.Coffee.Include(c => c.Category);
 
-        public IEnumerable<Coffee> getFavCars => appDBContent.Coffee.Include(c => c.Category);
+        public IEnumerable<Coffee> getCoffee => appDBContent.Coffee.Include(c => c.Category);
 
         public Coffee getObjectCar(int coffeeId) => appDBContent.Coffee.FirstOrDefault(p => p.id == coffeeId);
 

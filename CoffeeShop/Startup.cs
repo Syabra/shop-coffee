@@ -1,5 +1,9 @@
+using CoffeeShop.Data;
+using CoffeeShop.Data.Interfaces;
+using CoffeeShop.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,9 +16,10 @@ namespace CoffeeShop
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IConfigurationRoot _confString;
+        public Startup(IWebHostEnvironment hostEnv)
         {
-            Configuration = configuration;
+            _confString = new ConfigurationBuilder().SetBasePath(hostEnv.ContentRootPath).AddJsonFile("dbSettings.json").Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -22,6 +27,10 @@ namespace CoffeeShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AppDbContent>(opt => opt.UseSqlServer(_confString.GetConnectionString("DefaultConnection")));
+            services.AddTransient<IAllCoffee, CoffeeRepository>();
+            services.AddTransient<ICoffeeCategory, CategoryRepository>();
+            services.AddTransient<IAllOrders, OrdersRepository>();
             services.AddControllersWithViews();
         }
 
