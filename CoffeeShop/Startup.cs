@@ -60,6 +60,12 @@ namespace CoffeeShop
                 routes.MapRoute(name: "categoryFilter", template: "Coffee/{action}/{category?}", defaults: new { Controller = "Coffee", action = "ListAllCoffee" });
             });
 
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                AppDbContent content = scope.ServiceProvider.GetRequiredService<AppDbContent>();
+                DBObjects.Initial(content);
+            }
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

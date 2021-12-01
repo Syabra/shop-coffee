@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using CoffeeShop.Data.Models;
+using CoffeeShop.ViewModels;
 
 namespace CoffeeShop.Controllers
 {
@@ -12,17 +14,50 @@ namespace CoffeeShop.Controllers
         private readonly IAllCoffee _allCoffee;
         private readonly ICoffeeCategory _allCategories;
 
-        public CoffeeController(IAllCoffee iAllCoffee, ICoffeeCategory iCoffeeCategory)
+        public CoffeeController(IAllCoffee iAllCars, ICoffeeCategory iCarsCat)
         {
-            _allCoffee = iAllCoffee;
-            _allCategories = iCoffeeCategory;
+            _allCoffee = iAllCars;
+            _allCategories = iCarsCat;
         }
-        
-        public ViewResult List()
+
+        //<summary>
+        //Return view cars
+        //</summary>
+        [Route("Cars/ListAllCars")]
+        [Route("Cars/ListAllCars/{category}")]
+        public ViewResult AllCoffee(string category)
         {
-            var coffee = _allCoffee;
-            return View(coffee);
+            var _category = category;
+            IEnumerable<Coffee> coffee = null;
+            string currCategory = "";
+
+            if (string.IsNullOrEmpty(category))
+            {
+                coffee = _allCoffee.Coffee.OrderBy(i => i.id);
+            }
+            else
+            {
+                if (string.Equals("electro", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    coffee = _allCoffee.Coffee.Where(i => i.Category.categoryName.Equals("Фильтр-кофе")).OrderBy(i => i.id);
+                }
+                else if (string.Equals("fuel", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    coffee = _allCoffee.Coffee.Where(i => i.Category.categoryName.Equals("Эспрессо")).OrderBy(i => i.id);
+                }
+
+                currCategory = _category;
+            }
+
+            var carObj = new CoffeeListViewModel
+            {
+                AllCoffee = coffee,
+                currCategory = currCategory
+            };
+
+            return View(carObj);
         }
+
     }
 }
  

@@ -1,4 +1,5 @@
 ﻿using CoffeeShop.Data.Models;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,7 @@ namespace CoffeeShop.Data
     public class DBObjects
     {
         public static void Initial(AppDbContent content)
-        {
-
+        {         
             if (!content.Category.Any())
                 content.Category.AddRange(Categories.Select(c => c.Value));
 
@@ -95,7 +95,7 @@ namespace CoffeeShop.Data
                     {
                         new Category{ categoryName = "Фильтр-кофе"},
                         new Category{ categoryName = "Эспрессо"},
-                        new Category{ categoryName = "Фильтр-кофе"}
+                        new Category{ categoryName = "Дрип-пакеты"}
                     };
 
                     category = new Dictionary<string, Category>();
