@@ -43,5 +43,12 @@ namespace CoffeeShop.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+        public IActionResult Message_Item_Add()
+        {
+            ViewBag.Message = "Товар добавлен в корзину";
+            return View();
+        }
     }
 }

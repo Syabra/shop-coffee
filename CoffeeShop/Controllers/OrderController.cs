@@ -47,7 +47,7 @@ namespace CoffeeShop.Controllers
         public IActionResult Complete()
         {
             ViewBag.Message = "Заказ успешно обработан";
-            return View();
+            return Complete();
         }
     }
 }

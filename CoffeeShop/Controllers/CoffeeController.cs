@@ -23,8 +23,8 @@ namespace CoffeeShop.Controllers
         //<summary>
         //Return view cars
         //</summary>
-        [Route("Cars/ListAllCars")]
-        [Route("Cars/ListAllCars/{category}")]
+        [Route("Coffee/ListAllCoffee")]
+        [Route("Coffee/ListAllCoffee/{category}")]
         public ViewResult AllCoffee(string category)
         {
             var _category = category;
@@ -37,11 +37,11 @@ namespace CoffeeShop.Controllers
             }
             else
             {
-                if (string.Equals("electro", category, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals("Фильтр-кофе", category, StringComparison.OrdinalIgnoreCase))
                 {
                     coffee = _allCoffee.Coffee.Where(i => i.Category.categoryName.Equals("Фильтр-кофе")).OrderBy(i => i.id);
                 }
-                else if (string.Equals("fuel", category, StringComparison.OrdinalIgnoreCase))
+                else if (string.Equals("Эспрессо", category, StringComparison.OrdinalIgnoreCase))
                 {
                     coffee = _allCoffee.Coffee.Where(i => i.Category.categoryName.Equals("Эспрессо")).OrderBy(i => i.id);
                 }
