@@ -34,7 +34,6 @@ namespace CoffeeShop.Controllers
                 ModelState.AddModelError("", "У вас должны быть товары");
             }
 
-
             if (ModelState.IsValid)
             {
                 allOrders.createOrder(order);

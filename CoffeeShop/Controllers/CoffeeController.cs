@@ -14,18 +14,18 @@ namespace CoffeeShop.Controllers
         private readonly IAllCoffee _allCoffee;
         private readonly ICoffeeCategory _allCategories;
 
-        public CoffeeController(IAllCoffee iAllCars, ICoffeeCategory iCarsCat)
+        public CoffeeController(IAllCoffee iAllCars, ICoffeeCategory iCoffeeCat)
         {
             _allCoffee = iAllCars;
-            _allCategories = iCarsCat;
+            _allCategories = iCoffeeCat;
         }
 
         //<summary>
         //Return view cars
         //</summary>
-        [Route("Coffee/ListAllCoffee")]
-        [Route("Coffee/ListAllCoffee/{category}")]
-        public ViewResult AllCoffee(string category)
+        [Route("Coffee/List")]
+        [Route("Coffee/List/{category}")]
+        public ViewResult List(string category)
         {
             var _category = category;
             IEnumerable<Coffee> coffee = null;
@@ -37,25 +37,30 @@ namespace CoffeeShop.Controllers
             }
             else
             {
-                if (string.Equals("Фильтр-кофе", category, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals("Filtr-coffee", category, StringComparison.OrdinalIgnoreCase))
                 {
                     coffee = _allCoffee.Coffee.Where(i => i.Category.categoryName.Equals("Фильтр-кофе")).OrderBy(i => i.id);
+                    currCategory = "Фильтр-кофе";
                 }
-                else if (string.Equals("Эспрессо", category, StringComparison.OrdinalIgnoreCase))
+                else if (string.Equals("Espresso", category, StringComparison.OrdinalIgnoreCase))
                 {
                     coffee = _allCoffee.Coffee.Where(i => i.Category.categoryName.Equals("Эспрессо")).OrderBy(i => i.id);
+                    currCategory = "Эспрессо";
                 }
-
-                currCategory = _category;
+                else if(string.Equals("Drip-package", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    coffee = _allCoffee.Coffee.Where(i => i.Category.categoryName.Equals("Дрип-пакеты")).OrderBy(i => i.id);
+                    currCategory = "Дрип-пакеты";
+                }
             }
 
-            var carObj = new CoffeeListViewModel
+            var coffObj = new CoffeeListViewModel
             {
                 AllCoffee = coffee,
                 currCategory = currCategory
             };
 
-            return View(carObj);
+            return View(coffObj);
         }
 
     }

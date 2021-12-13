@@ -29,6 +29,7 @@ namespace CoffeeShop.Data.Repository
             {
                 var orderDetail = new OrderDetails()
                 {
+                    id = el.id,
                     CoffeeId = el.coffee.id,
                     orderID = order.id,
                     price = el.coffee.price,

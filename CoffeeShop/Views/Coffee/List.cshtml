@@ -1,6 +1,6 @@
 ﻿@model CoffeeListViewModel
 
-<h1>Весь кофе</h1>
+<h1>@Model.currCategory</h1>
 <div class="row mt-3 mb-2">
     @{
         foreach (Coffee coffee in Model.AllCoffee)
